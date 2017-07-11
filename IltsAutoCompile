@@ -1,0 +1,26 @@
+#!/bin/sh
+
+#使用须知：此工具只完成交易端代码编译工作，编译后需要自己部署编译的库文件。
+#需要将SVN上代码取出（即common和ctp）两个文件夹，将此工具放到同级目录，双击即可完成编译，
+#编译后会在工具所在目录生成Autolib文件夹，此文件夹中的库文件即为要布置到环境的文件。
+
+# 定义使用的库路径
+export CSLC_HOME=$(cd `dirname $0`; pwd)
+
+#清除历史
+rm -rf $CSLC_HOME/ctp/dist/ilts/*.*
+cd $CSLC_HOME/ctp/src/
+make clean
+#调用MAKE文编译程序
+#common
+cd $CSLC_HOME/common/src/
+make
+#ctp
+cd $CSLC_HOME/ctp/src/
+make
+
+#将编译后的库文件拷贝到固定路径
+mkdir -p $CSLC_HOME/Autolib
+cp -f  $CSLC_HOME/ctp/dist/ilts/*.* $CSLC_HOME/Autolib
+
+echo "Compile complete!!!!"
