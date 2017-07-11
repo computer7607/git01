@@ -1,0 +1,14 @@
+需要特别注意 报表服务 的连接字符串和其他服务不一样。报表的为ITDMSHDB(代码中写死)，其他的ITDMSDB必须单独配置才能用报表服务。
+
+1.需要使用Xshell工具，连接到环境
+2.输入：cd /cslp/ctp/ilts/bin 进行到bin 目录
+3.再输入：./db_console -e itdmsdb:用户名/密码@tiger1（数据库别名）
+4.执行上面的命令后会生成加密的数据库连接字符串，拷贝下来，存到db.enc文件，
+然后再利ftp工具上传至/cslp/ctp/ilts/config目录下。
+
+/cslp/ctp/ilts/bin/db_console -e itdmsdb:ilms/ilms@JCTDB
+
+5.集成2环境TNS配置路径/opt/tuxedo/client/product/11.2.0/client_2/network/admin
+/cslp/ctp/ilts/bin/db_console -e itdmshdb:dev/dev001@JCTHDB
+/cslp/ctp/ilts/bin/db_console -e itdmsdb:dev/dev001@JCTDB
+
